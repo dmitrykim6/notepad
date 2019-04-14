@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import java.security.Key;
 
 
@@ -18,38 +20,39 @@ class Viewer {
 
         JMenu menuFile = new JMenu("File");
 
-        ImageIcon createMenuItemIcon = new ImageIcon("icons/new.png");
+        ImageIcon createMenuItemIcon = new ImageIcon("src/icons/new.png");
         JMenuItem createMenuItem = new JMenuItem("New", createMenuItemIcon);
         createMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         createMenuItem.addActionListener(controller);
         createMenuItem.setActionCommand("New");
 
 
-
-        JMenuItem openMenuItem = new JMenuItem("Open");
+        ImageIcon openMenuItemIcon = new ImageIcon("src/icons/open.png");
+        JMenuItem openMenuItem = new JMenuItem("Open", openMenuItemIcon);
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
         openMenuItem.addActionListener(controller);
         openMenuItem.setActionCommand("Open");
 
-
-        JMenuItem saveMenuItem = new JMenuItem("Save");
+        ImageIcon saveMenuItemIcon = new ImageIcon("src/icons/save.png");
+        JMenuItem saveMenuItem = new JMenuItem("Save", saveMenuItemIcon);
         saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
         saveMenuItem.addActionListener(controller);
         saveMenuItem.setActionCommand("Save");
 
-
-        JMenuItem saveAsMenuItem = new JMenuItem("Save As ...");
+        ImageIcon saveAsMenuItemIcon = new ImageIcon("src/icons/saveas.png");
+        JMenuItem saveAsMenuItem = new JMenuItem("Save As ...", saveAsMenuItemIcon);
         saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK+ InputEvent.ALT_MASK));
         saveAsMenuItem.addActionListener(controller);
         saveAsMenuItem.setActionCommand("SaveAs");
 
-        JMenuItem pageSetupMenuItem = new JMenuItem("Page Setup ...");
+//        JMenuItem pageSetupMenuItem = new JMenuItem("Page Setup ...");
 
-
-        JMenuItem printMenuItem = new JMenuItem("Print ...");
+        ImageIcon printMenuItemIcon = new ImageIcon("src/icons/print.png");
+        JMenuItem printMenuItem = new JMenuItem("Print ...", printMenuItemIcon);
         printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
         printMenuItem.addActionListener(controller);
         printMenuItem.setActionCommand("Print");
+
 
         JMenuItem closeMenuItem = new JMenuItem("Exit");
         closeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
@@ -62,69 +65,81 @@ class Viewer {
         menuFile.add(saveMenuItem);
         menuFile.add(saveAsMenuItem);
         menuFile.add(new JSeparator());
-        menuFile.add(pageSetupMenuItem);
+//        menuFile.add(pageSetupMenuItem);
         menuFile.add(printMenuItem);
         menuFile.add(new JSeparator());
         menuFile.add(closeMenuItem);
 
         JMenu menuEdit = new JMenu("Edit");
 
-        JMenuItem undoMenuItem = new JMenuItem("Undo");
+        ImageIcon undoMenuItemIcon = new ImageIcon("src/icons/undo.png");
+        JMenuItem undoMenuItem = new JMenuItem("Undo", undoMenuItemIcon);
         undoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
         undoMenuItem.addActionListener(controller);
         undoMenuItem.setActionCommand("Undo");
 
-//        JMenuItem redoMenuItem = new JMenuItem("Redo");
+//        ImageIcon redoMenuItemIcon = new ImageIcon("src/icons/redo.png");
+//        JMenuItem redoMenuItem = new JMenuItem("Redo", redoMenuItemIcon);
 //        closeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK+ InputEvent.ALT_MASK));
 //        closeMenuItem.addActionListener(controller);
 //        closeMenuItem.setActionCommand("Redo");
 
-        JMenuItem cutMenuItem = new JMenuItem("Cut");
+        ImageIcon cutMenuItemIcon = new ImageIcon("src/icons/cut.png");
+        JMenuItem cutMenuItem = new JMenuItem("Cut", cutMenuItemIcon);
         cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
         cutMenuItem.addActionListener(controller);
         cutMenuItem.setActionCommand("Cut");
 
-        JMenuItem copyMenuItem = new JMenuItem("Copy");
+        ImageIcon copyMenuItemIcon = new ImageIcon("src/icons/copy.png");
+        JMenuItem copyMenuItem = new JMenuItem("Copy", copyMenuItemIcon);
         copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
         copyMenuItem.addActionListener(controller);
         copyMenuItem.setActionCommand("Copy");
 
-        JMenuItem pastMenuItem = new JMenuItem("Past");
+        ImageIcon pastMenuItemIcon = new ImageIcon("src/icons/past.png");
+        JMenuItem pastMenuItem = new JMenuItem("Past", pastMenuItemIcon);
         pastMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
         pastMenuItem.addActionListener(controller);
         pastMenuItem.setActionCommand("Past");
 
-        JMenuItem deleteMenuItem = new JMenuItem("Delete");
+        ImageIcon deleteMenuItemIcon = new ImageIcon("src/icons/delete.png");
+        JMenuItem deleteMenuItem = new JMenuItem("Delete", deleteMenuItemIcon);
         deleteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
         deleteMenuItem.addActionListener(controller);
         deleteMenuItem.setActionCommand("Delete");
 
-        JMenuItem findMenuItem = new JMenuItem("Find");
+        ImageIcon findMenuItemIcon = new ImageIcon("src/icons/find.png");
+        JMenuItem findMenuItem = new JMenuItem("Find", findMenuItemIcon);
         findMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
         findMenuItem.addActionListener(controller);
         findMenuItem.setActionCommand("Find");
 
-        JMenuItem findNextMenuItem = new JMenuItem("Find Next");
+        ImageIcon findNextMenuItemIcon = new ImageIcon("src/icons/null.png");
+        JMenuItem findNextMenuItem = new JMenuItem("Find Next", findNextMenuItemIcon);
         findNextMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
         findNextMenuItem.addActionListener(controller);
         findNextMenuItem.setActionCommand("FindNext");
 
-        JMenuItem replaceMenuItem = new JMenuItem("Replace ...");
+        ImageIcon replaceMenuItemIcon = new ImageIcon("src/icons/replace.png");
+        JMenuItem replaceMenuItem = new JMenuItem("Replace ...", replaceMenuItemIcon);
         replaceMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
         replaceMenuItem.addActionListener(controller);
         replaceMenuItem.setActionCommand("Replace");
 
-        JMenuItem goToMenuItem = new JMenuItem("Go To...");
+        ImageIcon goToMenuItemIcon = new ImageIcon("src/icons/goto.png");
+        JMenuItem goToMenuItem = new JMenuItem("Go To...", goToMenuItemIcon);
         goToMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
         goToMenuItem.addActionListener(controller);
         goToMenuItem.setActionCommand("GoTo");
 
-        JMenuItem selectAllMenuItem = new JMenuItem("Select All");
+        ImageIcon selectAllMenuItemIcon = new ImageIcon("src/icons/select.png");
+        JMenuItem selectAllMenuItem = new JMenuItem("Select All", selectAllMenuItemIcon);
         selectAllMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
         selectAllMenuItem.addActionListener(controller);
         selectAllMenuItem.setActionCommand("Select");
 
-        JMenuItem timeDateMenuItem = new JMenuItem("Time/Date");
+        ImageIcon timeDateMenuItemIcon = new ImageIcon("src/icons/time.png");
+        JMenuItem timeDateMenuItem = new JMenuItem("Time/Date", timeDateMenuItemIcon);
         timeDateMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
         timeDateMenuItem.addActionListener(controller);
         timeDateMenuItem.setActionCommand("Time/Date");
@@ -147,21 +162,30 @@ class Viewer {
 
         JMenu menuFormat = new JMenu("Format");
 
-        JMenuItem wordWrapMenuItem = new JMenuItem("Word wrap");
-        JMenuItem fontMenuItem = new JMenuItem("Font");
+        ImageIcon wordWrapMenuItemIcon = new ImageIcon("src/icons/warp.png");
+        JMenuItem wordWrapMenuItem = new JMenuItem("Word wrap", wordWrapMenuItemIcon);
+
+        ImageIcon fontMenuItemIcon = new ImageIcon("src/icons/font.png");
+        JMenuItem fontMenuItem = new JMenuItem("Font", fontMenuItemIcon);
+
+
         menuFormat.add(wordWrapMenuItem);
         menuFormat.add(fontMenuItem);
 
 
         JMenu menuView = new JMenu("View");
 
-        JMenuItem statusBarMenuItem = new JMenuItem("Status Bar");
+        ImageIcon statusBarMenuItemIcon = new ImageIcon("src/icons/status.png");
+        JMenuItem statusBarMenuItem = new JMenuItem("Status Bar", statusBarMenuItemIcon);
         menuView.add(statusBarMenuItem);
 
         JMenu menuHelp = new JMenu("Help");
 
-        JMenuItem viewHelpMenuItem = new JMenuItem("View help");
-        JMenuItem aboutTheProgramMenuItem = new JMenuItem("About the program");
+        ImageIcon viewHelpMenuItemIcon = new ImageIcon("src/icons/help.png");
+        JMenuItem viewHelpMenuItem = new JMenuItem("View help", viewHelpMenuItemIcon);
+
+        ImageIcon aboutTheProgramMenuItemIcon = new ImageIcon("src/icons/about.png");
+        JMenuItem aboutTheProgramMenuItem = new JMenuItem("About the program", aboutTheProgramMenuItemIcon);
         menuHelp.add(viewHelpMenuItem);
         menuHelp.add(new JSeparator());
         menuHelp.add(aboutTheProgramMenuItem);
@@ -175,8 +199,10 @@ class Viewer {
 
 
         JFrame frame = new JFrame("Notepad AUCA");
-        frame.setSize(500, 500);
-        frame.setLocation(100,100);
+
+        frame.setSize(600, 600);
+        frame.setLocationRelativeTo(null);
+//        frame.setLocation(100,100);
         frame.add("Center", scroll);
         frame.setJMenuBar(jMenuBar);
         frame.setVisible(true);

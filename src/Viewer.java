@@ -18,7 +18,8 @@ class Viewer {
 
         JMenu menuFile = new JMenu("File");
 
-        JMenuItem createMenuItem = new JMenuItem("New");
+        ImageIcon createMenuItemIcon = new ImageIcon("icons/new.png");
+        JMenuItem createMenuItem = new JMenuItem("New", createMenuItemIcon);
         createMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         createMenuItem.addActionListener(controller);
         createMenuItem.setActionCommand("New");

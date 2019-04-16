@@ -17,6 +17,8 @@ class Controller implements ActionListener{
             System.exit(1);
         } else if(command.equals("New")) {
             viewer.update("");
+        }else if(command.equals("Open")) {
+            viewer.chooseFile();
         }
     }
 

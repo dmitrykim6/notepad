@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
+import java.io.FileFilter;
 import java.security.Key;
-
 
 class Viewer {
 
@@ -13,10 +16,11 @@ class Viewer {
 
     Viewer(){
         Controller controller = new Controller (this);
+        JFrame frame = new JFrame("Notepad AUCA");
         textArea = new JTextArea();
         JScrollPane scroll = new JScrollPane(textArea);
-
         JMenuBar jMenuBar = new JMenuBar();
+        JFileChooser fileOpen = new JFileChooser();
 
         JMenu menuFile = new JMenu("File");
 
@@ -32,6 +36,7 @@ class Viewer {
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
         openMenuItem.addActionListener(controller);
         openMenuItem.setActionCommand("Open");
+
 
         ImageIcon saveMenuItemIcon = new ImageIcon("src/icons/save.png");
         JMenuItem saveMenuItem = new JMenuItem("Save", saveMenuItemIcon);
@@ -198,7 +203,7 @@ class Viewer {
         jMenuBar.add(menuHelp);
 
 
-        JFrame frame = new JFrame("Notepad AUCA");
+
 
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
@@ -209,6 +214,18 @@ class Viewer {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close program after exit
 
     }
+
+    public void chooseFile(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(null);
+        fileChooser.setDialogTitle("Выберите файл");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Text files only", "txt");
+        fileChooser.setFileFilter(filter);
+
+    }
+
     public void update(String text){
         textArea.setText(text);
 

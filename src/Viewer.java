@@ -6,8 +6,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.File;
-import java.io.FileFilter;
+import java.io.*;
 import java.security.Key;
 
 class Viewer {
@@ -83,11 +82,11 @@ class Viewer {
         undoMenuItem.addActionListener(controller);
         undoMenuItem.setActionCommand("Undo");
 
-//        ImageIcon redoMenuItemIcon = new ImageIcon("src/icons/redo.png");
-//        JMenuItem redoMenuItem = new JMenuItem("Redo", redoMenuItemIcon);
-//        closeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK+ InputEvent.ALT_MASK));
-//        closeMenuItem.addActionListener(controller);
-//        closeMenuItem.setActionCommand("Redo");
+        ImageIcon redoMenuItemIcon = new ImageIcon("src/icons/redo.png");
+        JMenuItem redoMenuItem = new JMenuItem("Redo", redoMenuItemIcon);
+        closeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK+ InputEvent.ALT_MASK));
+        closeMenuItem.addActionListener(controller);
+        closeMenuItem.setActionCommand("Redo");
 
         ImageIcon cutMenuItemIcon = new ImageIcon("src/icons/cut.png");
         JMenuItem cutMenuItem = new JMenuItem("Cut", cutMenuItemIcon);
@@ -151,6 +150,7 @@ class Viewer {
 
 
         menuEdit.add(undoMenuItem);
+//        menuEdit.add(redoMenuItem);
         menuEdit.add(new JSeparator());
         menuEdit.add(cutMenuItem);
         menuEdit.add(copyMenuItem);
@@ -203,8 +203,6 @@ class Viewer {
         jMenuBar.add(menuHelp);
 
 
-
-
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
 //        frame.setLocation(100,100);
@@ -215,19 +213,75 @@ class Viewer {
 
     }
 
-    public void chooseFile(){
+    File file;
+
+    public void openFile(){ //open file
+        String text = "";
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showOpenDialog(null);
-        fileChooser.setDialogTitle("Выберите файл");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Text files only", "txt");
         fileChooser.setFileFilter(filter);
+        int ret = fileChooser.showDialog(null, "Открыть файл");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            FileInputStream inF;
+            try{
+
+                inF = new FileInputStream(file);
+                BufferedReader  in = new BufferedReader(new InputStreamReader(inF, "UTF8"));
+                int words;
+                while ((words = in.read()) != -1){
+                    text = text + (char)words;
+                }
+                update(text);
+
+            }catch(IOException e){
+                System.out.println("Error");
+            }
+        }
+    }
+
+    public void saveFile() { // Save opened file
+            try{
+                FileWriter fw = new FileWriter(file);
+                fw.write(sendText().toString());
+                fw.close();
+
+            }catch(IOException e){
+                System.out.println("Error");
+            }
 
     }
 
-    public void update(String text){
+    public void saveAsFile(){ // Save As
+        String text = "test тест";
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Text files only", "txt");
+        fileChooser.setFileFilter(filter);
+        int retrival = fileChooser.showSaveDialog(null);
+        if (retrival == JFileChooser.APPROVE_OPTION){
+            try{
+                FileWriter fw = new FileWriter(fileChooser.getSelectedFile());
+                fw.write(sendText().toString());
+                fw.close();
+
+            }catch(IOException e){
+                System.out.println("Error");
+            }
+        }
+
+    }
+
+    public void update(String text){ //Changes in file
         textArea.setText(text);
-
     }
+
+    public String sendText(){ // Send text to save action
+        String text;
+        text = textArea.getText();
+        return text;
+    }
+
 }

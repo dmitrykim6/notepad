@@ -18,9 +18,12 @@ class Controller implements ActionListener{
         } else if(command.equals("New")) {
             viewer.update("");
         }else if(command.equals("Open")) {
-            viewer.chooseFile();
+            viewer.openFile();
+        }else if(command.equals("Save")) {
+            viewer.saveFile();
+        }else if(command.equals("SaveAs")) {
+            viewer.saveAsFile();
         }
     }
-
 
 }

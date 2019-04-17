@@ -1,17 +1,17 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.print.PrinterException;
 import java.io.*;
-import java.security.Key;
 
 class Viewer {
 
     JTextArea textArea;
+    boolean hasChanges = false;
 
     Viewer(){
         Controller controller = new Controller (this);
@@ -20,8 +20,8 @@ class Viewer {
         JScrollPane scroll = new JScrollPane(textArea);
         JMenuBar jMenuBar = new JMenuBar();
         JFileChooser fileOpen = new JFileChooser();
-
         JMenu menuFile = new JMenu("File");
+
 
         ImageIcon createMenuItemIcon = new ImageIcon("src/icons/new.png");
         JMenuItem createMenuItem = new JMenuItem("New", createMenuItemIcon);
@@ -59,7 +59,6 @@ class Viewer {
 
 
         JMenuItem closeMenuItem = new JMenuItem("Exit");
-        closeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
         closeMenuItem.addActionListener(controller);
         closeMenuItem.setActionCommand("Exit");
 
@@ -84,9 +83,9 @@ class Viewer {
 
         ImageIcon redoMenuItemIcon = new ImageIcon("src/icons/redo.png");
         JMenuItem redoMenuItem = new JMenuItem("Redo", redoMenuItemIcon);
-        closeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK+ InputEvent.ALT_MASK));
-        closeMenuItem.addActionListener(controller);
-        closeMenuItem.setActionCommand("Redo");
+        redoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK+ InputEvent.ALT_MASK));
+        redoMenuItem.addActionListener(controller);
+        redoMenuItem.setActionCommand("Redo");
 
         ImageIcon cutMenuItemIcon = new ImageIcon("src/icons/cut.png");
         JMenuItem cutMenuItem = new JMenuItem("Cut", cutMenuItemIcon);
@@ -213,9 +212,21 @@ class Viewer {
 
     }
 
-    File file;
+    File file; //File name
+
+    public void newFile(){
+//         проверка на внесение изменений в текущем файле
+//        if (hasChanges){
+//            System.out.println("Файл был изменен!");
+//        }
+//        System.out.println(hasChanges);
+        update("");
+
+    }
 
     public void openFile(){ //open file
+        // проверка на внесение изменений в текущем файле
+
         String text = "";
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -243,12 +254,20 @@ class Viewer {
     }
 
     public void saveFile() { // Save opened file
+
             try{
                 FileWriter fw = new FileWriter(file);
                 fw.write(sendText().toString());
                 fw.close();
 
             }catch(IOException e){
+                // Окно с ошибкой доступа к файлу (not work)
+                saveAsFile();
+                System.out.println("Error");
+
+            }catch(NullPointerException e){
+                // Save new document
+                saveAsFile();
                 System.out.println("Error");
             }
 
@@ -274,7 +293,29 @@ class Viewer {
 
     }
 
+    public void printFile(){
+        try{
+
+            boolean complite = textArea.print();
+            if(complite){
+                JOptionPane.showMessageDialog(null, "Done printing", "Information", JOptionPane.INFORMATION_MESSAGE);
+            } else{
+                JOptionPane.showMessageDialog(null, "Printing", "Printer", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }catch(PrinterException e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public void exit(){
+        System.out.println("GoodBye!");
+        System.exit(1);
+    }
+
+
     public void update(String text){ //Changes in file
+        hasChanges = true;
         textArea.setText(text);
     }
 
@@ -283,5 +324,7 @@ class Viewer {
         text = textArea.getText();
         return text;
     }
+
+
 
 }

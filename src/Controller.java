@@ -78,7 +78,7 @@ class Controller implements ActionListener{
 
         try{
             FileWriter fw = new FileWriter(file);
-            fw.write(sendText().toString());
+            fw.write(sendText()); // + .toString()
             fw.close();
 
         }catch(IOException e){

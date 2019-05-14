@@ -53,6 +53,11 @@ class Viewer {
         printMenuItem.addActionListener(controller);
         printMenuItem.setActionCommand("Print");
 
+        ImageIcon printDMenuItemIcon = new ImageIcon("src/icons/print.png");
+        JMenuItem printDMenuItem = new JMenuItem("Print2 ...", printDMenuItemIcon);
+        printDMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
+        printDMenuItem.addActionListener(controller);
+        printDMenuItem.setActionCommand("PrintD");
 
         JMenuItem closeMenuItem = new JMenuItem("Exit");
         closeMenuItem.addActionListener(controller);
@@ -65,6 +70,7 @@ class Viewer {
         menuFile.add(saveAsMenuItem);
         menuFile.add(new JSeparator());
         menuFile.add(printMenuItem);
+        menuFile.add(printDMenuItem);
         menuFile.add(new JSeparator());
         menuFile.add(closeMenuItem);
 

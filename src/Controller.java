@@ -29,6 +29,8 @@ class Controller implements ActionListener{
             saveAsFile();
         }else if(command.equals("Print")) {
             printFile();
+        }else if(command.equals("PrintD")){
+            printDevCit();
         }
     }
 
@@ -108,6 +110,18 @@ class Controller implements ActionListener{
                 System.out.println("Error");
             }
         }
+
+    }
+
+    public void printDevCit(){
+        int xStart = 100;
+        int yStart = 100;
+        int xEnd = 50;
+        int yEnd = 50;
+        String textToPrint = viewer.textArea.getText();
+
+        PrintDocument printDocs = new PrintDocument(xStart, yStart, xEnd, yEnd, textToPrint);
+        printDocs.doAction();
 
     }
 

@@ -61,7 +61,7 @@ class Viewer {
 //        printMenuItem.setActionCommand("Print");
 
         ImageIcon printDMenuItemIcon = new ImageIcon("src/icons/print.png");
-        JMenuItem printDMenuItem = new JMenuItem("Print2 ...", printDMenuItemIcon);
+        JMenuItem printDMenuItem = new JMenuItem("Print ...", printDMenuItemIcon);
         printDMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
         printDMenuItem.addActionListener(controller);
         printDMenuItem.setActionCommand("PrintD");

@@ -35,35 +35,39 @@ public class PrintOther implements Printable {
         char symbol;
         int widthAnySymbol;
         int countSymbols = 0;
+        int spacePosition = 0;
         textToPrintBuff = new StringBuffer(textToPrint);
 
         for (int i = 0; i < textToPrintBuff.length(); i ++){
             symbol = textToPrintBuff.charAt(i);
             widthAnySymbol = metrics.charWidth(symbol);
 
+            //         ищем близжайший слева пробел (v1)
+            if (symbol == ' '){
+                spacePosition = i;
+            }
+
             if(countSymbols > widthPage){
 
- //                    ищем близжайший слева пробел
-                for(int j = 0; j < 12; j++){
-                    if(textToPrintBuff.charAt(i - j) == ' '){
-                        textToPrintBuff.insert((i - j), "\n");
-                        i = i - j;
-                        break;
-                    }
-                }
+ //         ищем близжайший слева пробел (v2)
+//                for(int j = 0; j < 30; j++){
+//                    if(textToPrintBuff.charAt(i - j) == ' '){
+//                        textToPrintBuff.insert((i - j), "\n");
+//                        i = i - j;
+//                        break;
+//                    }
+//                }
 
-//                textToPrintBuff.insert((i), "\n");
+
+                textToPrintBuff.insert((spacePosition), "\n");
+                i = spacePosition;
 
                 countSymbols = 0;
             }
             countSymbols = countSymbols+ widthAnySymbol;
         }
         textLines = textToPrintBuff.toString().split("\n");
-
     }
-
-
-
 
     public int print(Graphics g, PageFormat pf, int PageIndex){
 
@@ -116,27 +120,8 @@ public class PrintOther implements Printable {
             g.drawString(textLines[line], x, y);
         }
 
-
         return PAGE_EXISTS;
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void doAction(){

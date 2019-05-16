@@ -51,7 +51,7 @@ class Controller implements ActionListener{
     public void openFile(){ //open file
         // проверка на внесение изменений в текущем файле
 
-        String text = null;
+        String text = "";
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Text files only", "txt");

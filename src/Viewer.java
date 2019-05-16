@@ -54,15 +54,15 @@ class Viewer {
 
 //        JMenuItem pageSetupMenuItem = new JMenuItem("Page Setup ...");
 
-        ImageIcon printMenuItemIcon = new ImageIcon("src/icons/print.png");
-        JMenuItem printMenuItem = new JMenuItem("Print ...", printMenuItemIcon);
-        printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
-        printMenuItem.addActionListener(controller);
-        printMenuItem.setActionCommand("Print");
+//        ImageIcon printMenuItemIcon = new ImageIcon("src/icons/print.png");
+//        JMenuItem printMenuItem = new JMenuItem("Print ...", printMenuItemIcon);
+//        printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
+//        printMenuItem.addActionListener(controller);
+//        printMenuItem.setActionCommand("Print");
 
         ImageIcon printDMenuItemIcon = new ImageIcon("src/icons/print.png");
         JMenuItem printDMenuItem = new JMenuItem("Print2 ...", printDMenuItemIcon);
-        printDMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
+        printDMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
         printDMenuItem.addActionListener(controller);
         printDMenuItem.setActionCommand("PrintD");
 
@@ -76,7 +76,7 @@ class Viewer {
         menuFile.add(saveMenuItem);
         menuFile.add(saveAsMenuItem);
         menuFile.add(new JSeparator());
-        menuFile.add(printMenuItem);
+//        menuFile.add(printMenuItem);
         menuFile.add(printDMenuItem);
         menuFile.add(new JSeparator());
         menuFile.add(closeMenuItem);

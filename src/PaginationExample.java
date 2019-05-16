@@ -2,7 +2,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.print.*;
-
+//        System.out.println("countAllLines " + countAllLines);
+//        System.out.println("textLines.length " + textLines.length);
+//        System.out.println("numBreaks " + numBreaks);
 public class PaginationExample implements Printable, ActionListener {
 
     int[] pageBreaks;  // array of page break line positions.
@@ -19,8 +21,7 @@ public class PaginationExample implements Printable, ActionListener {
         }
     }
 
-    public int print(Graphics g, PageFormat pf, int pageIndex)
-            throws PrinterException {
+    public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException {
 
         Font font = new Font("Serif", Font.PLAIN, 10);
         FontMetrics metrics = g.getFontMetrics(font);

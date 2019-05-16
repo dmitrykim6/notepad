@@ -120,14 +120,17 @@ class Controller implements ActionListener{
         int yEnd = 50;
         String textToPrint = viewer.textArea.getText();
 
-        PrintDocument printDocs = new PrintDocument(xStart, yStart, xEnd, yEnd, textToPrint);
-        printDocs.doAction();
+//        PrintDocument printDocs = new PrintDocument(xStart, yStart, xEnd, yEnd, textToPrint);
+//        printDocs.doAction();
+
+        NewPrint newPrintDocs = new NewPrint(xStart, yStart, xEnd, yEnd, textToPrint);
+        newPrintDocs.doAction();
+
 
     }
 
     public void printFile(){
         try{
-
             boolean complite = viewer.textArea.print();
             if(complite){
                 JOptionPane.showMessageDialog(null, "Done printing", "Information", JOptionPane.INFORMATION_MESSAGE);

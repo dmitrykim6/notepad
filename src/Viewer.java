@@ -11,6 +11,13 @@ class Viewer {
 
 
     Viewer(){
+
+        try {
+            String cn = UIManager.getSystemLookAndFeelClassName();
+            UIManager.setLookAndFeel(cn); // Use the native L&F
+        } catch (Exception cnf) {
+        }
+
         Controller controller = new Controller (this);
         JFrame frame = new JFrame("Notepad AUCA");
         textArea = new JTextArea();

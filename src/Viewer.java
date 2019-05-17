@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,7 @@ class Viewer {
         try {
             String cn = UIManager.getSystemLookAndFeelClassName();
             UIManager.setLookAndFeel(cn); // Use the native L&F
+            UIManager.getDefaults().put("TextArea.font", UIManager.getFont("TextField.font"));
         } catch (Exception cnf) {
         }
 
@@ -87,12 +89,16 @@ class Viewer {
         JMenuItem undoMenuItem = new JMenuItem("Undo", undoMenuItemIcon);
         undoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
         undoMenuItem.addActionListener(controller);
+        undoMenuItem.setOpaque(true);
+        undoMenuItem.setBackground(Color.lightGray);
         undoMenuItem.setActionCommand("Undo");
 
         ImageIcon redoMenuItemIcon = new ImageIcon("src/icons/redo.png");
         JMenuItem redoMenuItem = new JMenuItem("Redo", redoMenuItemIcon);
         redoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK+ InputEvent.ALT_MASK));
         redoMenuItem.addActionListener(controller);
+        redoMenuItem.setOpaque(true);
+        redoMenuItem.setBackground(Color.lightGray);
         redoMenuItem.setActionCommand("Redo");
 
         ImageIcon cutMenuItemIcon = new ImageIcon("src/icons/cut.png");

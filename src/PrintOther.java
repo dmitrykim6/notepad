@@ -13,16 +13,23 @@ public class PrintOther implements Printable {
     private String textToPrint;
     String[] textLines;
     int[] pageBreaks;
+    int pageNumber;
+    String pageNumberText;
+    String fileName;
+    boolean firstPage;
 
     StringBuffer textToPrintBuff;
 
-    public PrintOther(int xStart, int yStart, int xEnd, int yEnd, String textToPrint){
+    public PrintOther(int xStart, int yStart, int xEnd, int yEnd, String textToPrint, String fileName){
         this.xStart = xStart;
         this.yStart = yStart;
         this.xEnd = xEnd;
         this.yEnd = yEnd;
         this.textToPrint = textToPrint;
-
+        this.fileName = fileName;
+        pageNumber = 0;
+        pageNumberText =  "Page ";
+        firstPage = true;
 
 
         job = PrinterJob.getPrinterJob();
@@ -36,6 +43,7 @@ public class PrintOther implements Printable {
         int widthAnySymbol;
         int countSymbols = 0;
         int spacePosition = 0;
+
         textToPrintBuff = new StringBuffer(textToPrint);
 
         for (int i = 0; i < textToPrintBuff.length(); i ++){
@@ -71,6 +79,7 @@ public class PrintOther implements Printable {
 
     public int print(Graphics g, PageFormat pf, int PageIndex){
 
+
         Graphics2D g2d = (Graphics2D)g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
 
@@ -96,6 +105,7 @@ public class PrintOther implements Printable {
         }
 
         if (PageIndex > pageBreaks.length) {
+
             return NO_SUCH_PAGE;
         }
 
@@ -115,10 +125,18 @@ public class PrintOther implements Printable {
             end = pageBreaks[PageIndex];
         }
 
+        //Верхний колонтитул
+        g.drawString(fileName, widthPage / 2 - fileName.length() / 2, 30);
+
+        //печать документа
         for (int line = start; line < end; line++) {
             y += lineHeight;
             g.drawString(textLines[line], x, y);
         }
+
+        //Нижний колонтитул
+        pageNumber++;
+        g.drawString(pageNumberText + pageNumber/2, widthPage / 2 - pageNumberText.length() / 2, y + 20);
 
         return PAGE_EXISTS;
     }

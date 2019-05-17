@@ -9,6 +9,7 @@ import java.io.*;
 class Controller implements ActionListener{
     Viewer viewer;
     boolean hasChanges = false;
+    String fileName;
     JFileChooser fileChooser = new JFileChooser();;
     Controller(Viewer viewer){
         this.viewer = viewer;
@@ -59,6 +60,7 @@ class Controller implements ActionListener{
         int ret = fileChooser.showDialog(null, "Открыть файл");
         if (ret == JFileChooser.APPROVE_OPTION) {
             file = fileChooser.getSelectedFile();
+            fileName = fileChooser.getSelectedFile().getName();
             FileInputStream inF;
             try{
 
@@ -125,7 +127,7 @@ class Controller implements ActionListener{
 //        PrintDocument printDocs = new PrintDocument(xStart, yStart, xEnd, yEnd, textToPrint);
 //        printDocs.doAction();
 
-        PrintOther newPrintDocs = new PrintOther(xStart, yStart, xEnd, yEnd, textToPrint);
+        PrintOther newPrintDocs = new PrintOther(xStart, yStart, xEnd, yEnd, textToPrint, fileName);
         newPrintDocs.doAction();
 
 

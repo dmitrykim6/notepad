@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.print.PrinterException;
@@ -7,10 +8,14 @@ import java.io.*;
 
 
 class Controller implements ActionListener{
-    Viewer viewer;
-    boolean hasChanges = false;
-    String fileName;
-    JFileChooser fileChooser = new JFileChooser();;
+    private Viewer viewer;
+    private boolean hasChanges = false;
+    private boolean isWrap = false;
+    private String fileName;
+    private String copyText;
+    private File file; //File name
+    private JFileChooser fileChooser = new JFileChooser();
+
     Controller(Viewer viewer){
         this.viewer = viewer;
     }
@@ -28,7 +33,26 @@ class Controller implements ActionListener{
             saveFile();
         }else if(command.equals("SaveAs")) {
             saveAsFile();
+        }else if(command.equals("wordwrap")){
+            wordwrap();
+        }else if(command.equals("Copy")){
+            copy();
+        }else if(command.equals("Cut")){
+            cut();
+        }else if(command.equals("Past")){
+            past();
+        }else if(command.equals("Select")){
+            selectAll();
+        }else if(command.equals("Delete")){
+            delete();
+        }else if(command.equals("Undo")){
+            undo();
+        }else if(command.equals("Help")){
+            help();
+        }else if(command.equals("About")){
+            about();
         }
+
 //        else if(command.equals("Print")) {
 //            printFile();
 //        }
@@ -37,7 +61,61 @@ class Controller implements ActionListener{
         }
     }
 
-    File file; //File name
+
+
+    public void selectAll(){
+        viewer.textArea.selectAll();
+
+    }
+
+    public void help(){
+        viewer.helpWindow.setVisible(true);
+
+    }
+
+    public void about(){
+        viewer.aboutWindow.setVisible(true);
+    }
+
+    public void undo(){
+
+    }
+
+    public void copy(){
+        copyText = viewer.textArea.getSelectedText();
+    }
+
+    public void cut(){
+        copyText = viewer.textArea.getSelectedText();
+        int start = viewer.textArea.getSelectionStart();
+        int end = viewer.textArea.getSelectionEnd();
+        viewer.textArea.replaceSelection("");
+    }
+
+    public void delete(){
+        viewer.textArea.replaceSelection("");
+    }
+
+    public void past(){
+        if(!copyText.equals("")){
+            viewer.textArea.insert(copyText, viewer.textArea.getCaretPosition());
+        }
+
+    }
+
+    public void wordwrap(){
+
+        if(!isWrap){
+            isWrap = true;
+            viewer.textArea.setLineWrap(true);
+            viewer.textArea.setWrapStyleWord(true);
+        }else{
+            isWrap = false;
+            viewer.textArea.setLineWrap(false);
+            viewer.textArea.setWrapStyleWord(false);
+        }
+
+    }
 
     public void newFile(){
 //         проверка на внесение изменений в текущем файле

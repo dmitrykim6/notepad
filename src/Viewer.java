@@ -58,14 +58,6 @@ class Viewer {
         saveAsMenuItem.addActionListener(controller);
         saveAsMenuItem.setActionCommand("SaveAs");
 
-//        JMenuItem pageSetupMenuItem = new JMenuItem("Page Setup ...");
-
-//        ImageIcon printMenuItemIcon = new ImageIcon("src/icons/print.png");
-//        JMenuItem printMenuItem = new JMenuItem("Print ...", printMenuItemIcon);
-//        printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
-//        printMenuItem.addActionListener(controller);
-//        printMenuItem.setActionCommand("Print");
-
         ImageIcon printDMenuItemIcon = new ImageIcon("src/icons/print.png");
         JMenuItem printDMenuItem = new JMenuItem("Print ...", printDMenuItemIcon);
         printDMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
@@ -76,20 +68,16 @@ class Viewer {
         closeMenuItem.addActionListener(controller);
         closeMenuItem.setActionCommand("Exit");
 
-
         menuFile.add(createMenuItem);
         menuFile.add(openMenuItem);
         menuFile.add(saveMenuItem);
         menuFile.add(saveAsMenuItem);
         menuFile.add(new JSeparator());
-//        menuFile.add(printMenuItem);
         menuFile.add(printDMenuItem);
         menuFile.add(new JSeparator());
         menuFile.add(closeMenuItem);
 
         JMenu menuEdit = new JMenu("Edit");
-
-
 
         ImageIcon undoMenuItemIcon = new ImageIcon("src/icons/undo.png");
         undoMenuItem = new JMenuItem("Undo", undoMenuItemIcon);
@@ -200,8 +188,6 @@ class Viewer {
         JMenuItem fontMenuItem = new JMenuItem("Font", fontMenuItemIcon);
         fontMenuItem.setEnabled(false);
 
-
-
         menuFormat.add(wordWrapMenuItem);
         menuFormat.add(fontMenuItem);
 
@@ -256,7 +242,5 @@ class Viewer {
         aboutWindow.setVisible(false);
 
     }
-
-
 
 }

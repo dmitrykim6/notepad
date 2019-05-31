@@ -11,14 +11,14 @@ public class PrintOther implements Printable {
     private int xEnd;
     private int yEnd;
     private String textToPrint;
-    String[] textLines;
-    int[] pageBreaks;
-    int pageNumber;
-    String pageNumberText;
-    String fileName;
-    boolean firstPage;
+    private String[] textLines;
+    private int[] pageBreaks;
+    private int pageNumber;
+    private String pageNumberText;
+    private String fileName;
+    private boolean firstPage;
 
-    StringBuffer textToPrintBuff;
+    private StringBuffer textToPrintBuff;
 
     public PrintOther(int xStart, int yStart, int xEnd, int yEnd, String textToPrint, String fileName){
         this.xStart = xStart;
@@ -56,16 +56,6 @@ public class PrintOther implements Printable {
             }
 
             if(countSymbols > widthPage){
-
- //         ищем близжайший слева пробел (v2)
-//                for(int j = 0; j < 30; j++){
-//                    if(textToPrintBuff.charAt(i - j) == ' '){
-//                        textToPrintBuff.insert((i - j), "\n");
-//                        i = i - j;
-//                        break;
-//                    }
-//                }
-
 
                 textToPrintBuff.insert((spacePosition), "\n");
                 i = spacePosition;
@@ -148,7 +138,7 @@ public class PrintOther implements Printable {
             try {
                 job.print();
             } catch (PrinterException ex) {
-                /* The job did not successfully complete */
+                System.out.println(ex);
             }
         }
     }

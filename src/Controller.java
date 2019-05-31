@@ -1,16 +1,14 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.print.PrinterException;
 import java.io.*;
 
 
 class Controller implements ActionListener{
     private Viewer viewer;
-    private boolean hasChanges = false;
     private boolean isWrap = false;
+    private boolean hasChanges = false;
     private String fileName;
     private String copyText;
     private File file; //File name
@@ -51,12 +49,7 @@ class Controller implements ActionListener{
             help();
         }else if(command.equals("About")){
             about();
-        }
-
-//        else if(command.equals("Print")) {
-//            printFile();
-//        }
-        else if(command.equals("PrintD")){
+        }else if(command.equals("PrintD")){
             printDevCit();
         }
     }
@@ -87,8 +80,6 @@ class Controller implements ActionListener{
 
     public void cut(){
         copyText = viewer.textArea.getSelectedText();
-        int start = viewer.textArea.getSelectionStart();
-        int end = viewer.textArea.getSelectionEnd();
         viewer.textArea.replaceSelection("");
     }
 
@@ -202,28 +193,10 @@ class Controller implements ActionListener{
         int yEnd = 100;
         String textToPrint = viewer.textArea.getText();
 
-//        PrintDocument printDocs = new PrintDocument(xStart, yStart, xEnd, yEnd, textToPrint);
-//        printDocs.doAction();
-
         PrintOther newPrintDocs = new PrintOther(xStart, yStart, xEnd, yEnd, textToPrint, fileName);
         newPrintDocs.doAction();
 
-
     }
-
-//    public void printFile(){
-//        try{
-//            boolean complite = viewer.textArea.print();
-//            if(complite){
-//                JOptionPane.showMessageDialog(null, "Done printing", "Information", JOptionPane.INFORMATION_MESSAGE);
-//            } else{
-//                JOptionPane.showMessageDialog(null, "Printing", "Printer", JOptionPane.ERROR_MESSAGE);
-//            }
-//
-//        }catch(PrinterException e){
-//            JOptionPane.showMessageDialog(null, e);
-//        }
-//    }
 
     public void exit(){
         System.out.println("GoodBye!");
@@ -241,9 +214,5 @@ class Controller implements ActionListener{
         text = viewer.textArea.getText();
         return text;
     }
-
-
-
-
 
 }
